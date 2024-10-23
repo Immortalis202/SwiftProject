@@ -1,0 +1,15 @@
+{
+  "originHash" : "e24eca017693234f62531e9bd7054906479e54ebe5fcf821e4f6e26596c0b03a",
+  "pins" : [
+    {
+      "identity" : "radiobutton",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lukluca/RadioButton",
+      "state" : {
+        "revision" : "c481cecb8133775210ba0487c57d1d9174e3aa6d",
+        "version" : "1.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}
