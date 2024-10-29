@@ -38,29 +38,7 @@ struct ContentView: View {
 	
     var body: some View {
         
-        @State var imageURL = ""
-        VStack(spacing: 16){
-            Text("Guess The Flag").font(.largeTitle).padding(.bottom)
-                
-            Rectangle()
-                .fill(.gray.opacity(0.1))
-                .overlay(
-                    AsyncImage(
-                        url: URL(string: "https://flagcdn.com/h240/ua.png"))
-                    
-                )
-                .frame(height: 240)
-                .padding(.horizontal)
-                .padding(.top, 30)
-            Spacer()
-            VStack(spacing: 12){
-                RadioButton(title: title,
-                            itemTitle: \.rawValue,
-                            isSelected: $city)
-            }.padding(.horizontal)
-            Spacer()
-            
-        }
+        Flags()
         
     }
 }
