@@ -12,34 +12,34 @@ import RadioButton
 
 struct ContentView: View {
 	
-    private var elenco:[String] = [
-        "andorra",
-        "ua",
-        "qualcosa",
-        "testo4"
-    ]
-	
-    enum City: String, CaseIterable, Identifiable {
-        case milano
-        case roma
-        case palermo
-        case napoli
-        
-        var id: RawValue {
-            rawValue
-        }
-    }
-    @State var selectedColor = ""
     
-    @State private var city = City.milano
-    
-    
-	var title = ""
 	
     var body: some View {
         
-        Flags()
-        
+        NavigationView {
+            ZStack{
+                Color.orange.opacity(0.4).edgesIgnoringSafeArea(.all)
+                VStack(spacing: 20) {
+                    NavigationLink(destination: Flags()) {
+                        Text("Easy Version")
+                            .font(.title)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                            .foregroundColor(.white)
+                    }
+                    
+                    NavigationLink(destination: FlagsHard()) {
+                        Text("Difficult Version")
+                            .font(.title)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.green))
+                            .foregroundColor(.white)
+                    }
+                }
+                .navigationTitle("GUESS THE FLAG")
+                .padding()
+            }
+        }
     }
 }
 

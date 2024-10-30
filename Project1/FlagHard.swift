@@ -186,6 +186,19 @@ struct FlagsHard: View {
                                     }
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(.blue))
+                                if !filteredFlags.isEmpty {
+                                                                List(filteredFlags, id: \.code) { flag in
+                                                                    Text(flag.name)
+                                                                        .onTapGesture {
+                                                                            HuserInput = flag.name // Set the input to the selected flag's name
+                                                                            filteredFlags.removeAll() // Clear the suggestions
+                                                                        }
+                                                                }
+                                                                .frame(height: 200) // Set a fixed height for the list
+                                                                .background(Color.white)
+                                                                .cornerRadius(10)
+                                                                .padding(.horizontal)
+                                                            }
                             }
                             .padding(.horizontal)
                         }
@@ -268,142 +281,3 @@ struct FlagsHard: View {
 #Preview {
     FlagsHard()
 }
-
-//import SwiftUI
-//
-//struct FlagsHard: View {
-//    @State private var flags: [Flag] = [
-//        // Your flags here...
-//    ]
-//    
-//    @State private var HusedFlags: [Flag] = []
-//    @State private var HcurrentFlag: Flag?
-//    @State private var HuserInput: String = ""
-//    @State private var HisCorrect: Bool?
-//    @State private var Hscore: Int = 0
-//    @State private var Hround: Int = 0
-//    @State private var HscorePercentage: Double = 0.0
-//    
-//    @State private var filteredFlags: [Flag] = []
-//
-//    var body: some View {
-//        NavigationView {
-//            ZStack {
-//                Color.purple.opacity(0.4).edgesIgnoringSafeArea(.all)
-//                
-//                VStack(spacing: 20) {
-//                    Text("Guess the Flag")
-//                        .font(.largeTitle)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.black)
-//                        .padding(.top)
-//                    
-//                    Text("Correct Answer: \(Hscore) out of \(Hround): \(HscorePercentage, specifier: "%.2f")%").padding(.top)
-//                    
-//                    if let flag = HcurrentFlag, let imageUrl = URL(string: flag.imageURL) {
-//                        AsyncImage(url: imageUrl) { phase in
-//                            switch phase {
-//                            case .success(let image):
-//                                image
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(height: 300)
-//                                    .shadow(radius: 1)
-//                                    .padding()
-//                            case .failure:
-//                                Image(systemName: "exclamationmark.triangle")
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(height: 300)
-//                                    .foregroundColor(.red)
-//                                    .padding()
-//                            case .empty:
-//                                ProgressView()
-//                                    .frame(height: 300)
-//                                    .padding()
-//                            @unknown default:
-//                                EmptyView()
-//                            }
-//                        }
-//                        
-//                        VStack(spacing: 15) {
-//                            TextField("Enter country name", text: $HuserInput)
-//                                .padding()
-//                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
-//                                .autocapitalization(.words)
-//                                .padding(.horizontal)
-//                                .onChange(of: HuserInput) { newValue in
-//                                    filteredFlags = flags.filter { $0.name.lowercased().contains(newValue.lowercased()) }
-//                                }
-//
-//                            Button(action: {
-//                                checkAnswer()
-//                            }) {
-//                                Text("Submit")
-//                                    .font(.title3.bold())
-//                                    .foregroundColor(.white)
-//                                    .frame(maxWidth: .infinity)
-//                                    .padding()
-//                                    .background(RoundedRectangle(cornerRadius: 10).fill(.blue))
-//                            }
-//                            .padding(.horizontal)
-//
-//                            if !filteredFlags.isEmpty {
-//                                List(filteredFlags) { flag in
-//                                    Text(flag.name)
-//                                        .onTapGesture {
-//                                            HuserInput = flag.name // Set the input to the selected flag name
-//                                            filteredFlags = [] // Clear suggestions
-//                                        }
-//                                }
-//                                .frame(height: 200) // Adjust height as needed
-//                            }
-//                        }
-//
-//                        if let isCorrect = HisCorrect {
-//                            VStack(spacing: 15) {
-//                                Text(isCorrect ? "Correct!" : "Try again!")
-//                                    .font(.title2.bold())
-//                                    .foregroundColor(isCorrect ? .green : .red)
-//                                
-//                                Text("The correct answer is: \(flag.name)")
-//                                    .font(.title3.bold())
-//                                
-//                                Button(action: generateNewGame) {
-//                                    Text("New Game")
-//                                        .font(.title3.bold())
-//                                        .foregroundColor(.white)
-//                                        .frame(maxWidth: .infinity)
-//                                        .padding()
-//                                        .background(RoundedRectangle(cornerRadius: 10).fill(isCorrect ? .green : .red))
-//                                        .padding(.horizontal)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            .navigationBarTitleDisplayMode(.large)
-//            .onAppear(perform: generateNewGame)
-//        }
-//    }
-//    
-//    private func generateNewGame() {
-//        // Reset the game logic
-//        // ...
-//    }
-//    
-//    private func checkAnswer() {
-//        // Check answer logic
-//        // ...
-//    }
-//    
-//    private func resetGame() {
-//        // Reset game logic
-//        // ...
-//    }
-//}
-//
-//#Preview {
-//    FlagsHard()
-//}
